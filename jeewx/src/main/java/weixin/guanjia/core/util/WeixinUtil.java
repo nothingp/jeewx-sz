@@ -18,10 +18,12 @@ import javax.net.ssl.TrustManager;
 
 import net.sf.json.JSONObject;
 
+import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.web.system.service.SystemService;
 
 import weixin.guanjia.core.entity.common.AccessToken;
 import weixin.guanjia.core.entity.model.AccessTokenYw;
+import weixin.guanjia.core.entity.model.SubscribeUserInfo;
 
 /**
  * 公众平台通用接口工具类
@@ -235,5 +237,22 @@ public class WeixinUtil {
         return bt;  
         
     }  
+    
+    public static SubscribeUserInfo getSubscribeUserInfo(String accessToken, String openid) {
+        if (StringUtil.isEmpty(openid)) {
+            return null;
+        } else {
+            String u = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=${access_token}&openid=${openid}&lang=zh_CN".replace("${access_token}", accessToken).replace("${openid}", openid);
+            JSONObject jsonObject = httpRequest(u, "GET", (String)null);
+
+            try {
+                SubscribeUserInfo msg = (SubscribeUserInfo)JSONObject.toBean(jsonObject, SubscribeUserInfo.class);
+                return msg;
+            } catch (Exception var5) {
+                var5.printStackTrace();
+                return null;
+            }
+        }
+    }
     
 }

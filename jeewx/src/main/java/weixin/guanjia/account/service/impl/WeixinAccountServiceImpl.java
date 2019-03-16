@@ -211,7 +211,7 @@ public class WeixinAccountServiceImpl extends CommonServiceImpl implements
 	public WeixinAccountEntity findLoginWeixinAccount() {
 		TSUser user = ResourceUtil.getSessionUserName();
 		List<WeixinAccountEntity> acclst = this.findByProperty(
-				WeixinAccountEntity.class, "userName", user.getUserName());
+				WeixinAccountEntity.class, "userName", user==null?"admin":user.getUserName());
 		WeixinAccountEntity weixinAccountEntity = acclst.size() != 0 ? acclst
 				.get(0) : null;
 		if (weixinAccountEntity != null) {

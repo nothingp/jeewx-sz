@@ -105,6 +105,10 @@
 			<bean class="org.jeecgframework.core.interceptors.EncodingInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
+            <mvc:mapping path="/weixinFtthInfoController.do" />
+            <bean class="org.jeecgframework.core.interceptors.OpenIdInterceptor" />
+        </mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="org.jeecgframework.core.interceptors.AuthInterceptor">
 				<property name="excludeUrls">
@@ -142,6 +146,7 @@
 				<property name="excludeContainUrls">
 					<list>
 						<value>rest/openwx</value>
+						<value>weixinFtthInfoController</value>
 						<value>openDataController</value>
 						<!-- 支付窗排除URL -->
 						<value>alipay/alipayNewsitem.do?goContent</value>
