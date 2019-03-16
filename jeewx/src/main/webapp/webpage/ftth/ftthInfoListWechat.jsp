@@ -10,15 +10,15 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="format-detection" content="address=no">
-		<title>佛山移动宽带报装</title>
+		<title>移动宽带报装</title>
 		<script type="text/javascript" src="${webRoot}/toAdd/src/js/resize.js"></script>
-		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 		<script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-		<script src="${webRoot}/plug-in/jquery-ui-1.11.4/jquery-ui.js"></script>
+		<%-- <script src="${webRoot}/plug-in/jquery-ui-1.11.4/jquery-ui.js"></script> --%>
 		<link rel="stylesheet" type="text/css" href="${webRoot}/toAdd/src/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="${webRoot}/plug-in/jquery-ui-1.11.4/jquery-ui.css">
+		<%-- <link rel="stylesheet" type="text/css" href="${webRoot}/plug-in/jquery-ui-1.11.4/jquery-ui.css"> --%>
 
-		<script>
+		<!-- <script>
 		var _hmt = _hmt || [];
 		(function() {
 		  var hm = document.createElement("script");
@@ -26,7 +26,7 @@
 		  var s = document.getElementsByTagName("script")[0];
 		  s.parentNode.insertBefore(hm, s);
 		})();
-		</script>
+		</script> -->
 
 		<style type="text/css">
 			html{
@@ -376,7 +376,7 @@
 
 
 			$(document).ready(function () {
-				$("#addressRegion").change(function(){
+				/* $("#addressRegion").change(function(){
 					var value = $("#addressRegion").val();
 					 // 先清空第二个
 					//加载数据
@@ -420,7 +420,7 @@
 //				});
 
 				$("#addressRegion option").eq(0).attr("selected",true);
-				$("#addressRegion").trigger("change");
+				$("#addressRegion").trigger("change"); */
 			});
 		</script>
 	</head>
@@ -594,9 +594,9 @@
 				<input type="hidden" id="state" name="state" value="1" />
 				<input type="hidden" id="packagePrice" name="packagePrice" />
 				<input type="hidden" id="address" name="address" />
-				<div><label ><span>联系人</span><input id="name" name="name" type="text" placeholder="请输入您的真实姓名" ></label></div>
+				<!-- <div><label ><span>联系人</span><input id="name" name="name" type="text" placeholder="请输入您的真实姓名" ></label></div> -->
 				<div><label ><span>联系电话</span><input id="phone" name="phone" type="text" placeholder="请输入您的电话" ></label></div>
-				<div><label ><span>手机套餐</span><select id="phonePackage" name="phonePackage">
+				<%-- <div><label ><span>手机套餐</span><select id="phonePackage" name="phonePackage">
 					<option value="0">无套餐</option>
                                         <option value="48" >18-38元</option>
 					<option value="58" selected>58元</option>
@@ -604,7 +604,7 @@
 					<option value="188">138元及以上</option>
 				</select></label></div>
 				<div><label ><span>宽带速率</span><select id="lanLevel" name="lanLevel">
-					<%--<option value="12">12M</option>--%>
+					<option value="12">12M</option>
 					<option value="20">20M</option>
 					<option value="50">50M</option>
 					<option value="100">100M</option>
@@ -625,9 +625,9 @@
 					<option value="高明">高明</option>
 				</select></label></div>
 				<div><label ><span></span></label><input name="addressName" id="addressName" type="text" placeholder="请输入小区关键字" ></div>
-				<div style="display: none"><label ><span>小区地址</span><input name="addressPre" id="addressPre"  type="text" placeholder="如：几栋几楼" ></label></label></div>
-				<div><label ><span>详细楼层</span><input id="addressTail" name="addressTail" type="text" placeholder="如：几栋几楼" ></label></div>
-				<p style="display:none">
+				<div style="display: none"><label ><span>小区地址</span><input name="addressPre" id="addressPre"  type="text" placeholder="如：几栋几楼" ></label></label></div> --%>
+				<div><label ><span>详细地址</span><input id="address" name="address" type="text" placeholder="如：某小区几栋几楼" ></label></div>
+				<%-- <p style="display:none">
 					<span class="iden-tit">上传身份证</span>
 					<span class="iden-tip">上传正面 > 上传背面 > 提交身份证</span>
 				</p>
@@ -642,7 +642,7 @@
 						<img id="idCardBackImg" src="${webRoot}/toAdd/images/iden-2.png" alt="背面">
 						<a href="javascript:;" onclick="selectBackImage()">上传背面</a>
 					</div>
-				</div>
+				</div> --%>
 			</form>
 		</section>
 

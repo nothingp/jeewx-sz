@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name='apple-touch-fullscreen' content='yes'>
+		<meta name="full-screen" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="address=no">
+		<title>佛山移动宽带报装</title>
+
+		<script type="text/javascript" src="./src/js/resize.js"></script>
+		<link rel="stylesheet" type="text/css" href="./src/css/reset.css">
+
+		<style type="text/css">
+			html{
+				background-color: #058be2;
+			  	color: #058be2;
+				font-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+				font-size: 12px;
+				overflow-y: scroll;
+				direction: ltr;
+				font-size: 100px;
+			}
+			.back{
+				color: #000;
+			}
+			header{
+				background: transparent url('./images/header.png') no-repeat left top/ 100% auto ;
+				height: 1.3rem;
+				width: 100%;
+			}
+			header h1{
+				background: transparent url('./images/title.png') no-repeat left bottom/ 100% auto;
+				width: 1.45rem;
+				height: 0.25rem;
+				text-indent: -9999px;
+				margin: 0 auto;
+				padding-top: 1.65rem;
+			}
+			.white-container{
+				margin: 0.11rem 0.11rem 0;
+				background-color: #fff;
+				border-radius: 0.1rem;
+				padding: 0.15rem;
+			}
+			.white-container.first{
+				margin-top: 0.55rem;
+			}
+			.tab-one,.tab-two{
+				font-size: 0.12rem;
+			}
+			.tab-one h1,.tab-two h1{
+				background: transparent url('./images/h-one.png') no-repeat left top/ 100% auto;
+				width: 1rem;
+				height: 0.17rem;
+				text-indent: -9999px;
+				margin: 0.15rem 0 0.1rem;
+			}
+			.tab-two h1{
+				background: transparent url('./images/h-two.png') no-repeat left top/100% auto;
+				width: 1.42rem;
+				margin-top: 0.25rem;
+			}
+			.tab-one table,
+			.tab-two table{
+				width: 100%;
+				height: 100%;
+				table-layout: fixed;
+				text-align: center;
+				border-spacing: 0;
+				border-collapse: 0;
+			}
+			.tab-one table th,
+			.tab-two table th{
+				color: #fff;
+				background-color: #0066a8;
+				font-weight: bold;
+				font-size: 0.14rem;
+				height: 0.25rem;
+				line-height: 0.25rem;
+				border-left: 1px solid #868585;
+				border-right: 1px solid #868585;
+				vertical-align: middle;
+			}
+			.tab-one table td{
+				color: #000;
+				line-height: 0.2rem;
+				height: 0.2rem;
+				border: 1px solid #868585;
+			}
+			.tab-two p{
+				line-height: 0.2rem;
+				font-size: 0.14rem;
+			}
+			.tab-two p strong{
+				font-weight: bold;
+			}
+			p.tip{
+				color: #000;
+				font-size: 0.12rem;
+				line-height: 0.14rem;
+				font-family: '黑体';
+				margin: 0.05rem 0;
+			}
+			.tab-two table td{
+				color: #000;
+				border: 1px solid #868585;
+				line-height: 0.2rem;
+				height: 0.2rem;
+			}
+			.tab-two .white td{
+				color: #fff;
+			}
+			.tab-two td.blue{
+				color: #0066a8;
+			}
+			.text-tip p{
+				font-size: 0.16rem;
+				margin-bottom: 0.16rem;
+				line-height: 0.2rem;
+			}
+			.text-tip p:last-child{
+				margin-bottom: 0;
+			}
+			.text-tip p strong{
+				font-weight: bold;
+			}
+			.form{
+				margin: 0.11rem 0.11rem 0;
+				background-color: #fff;
+				border-radius: 0.1rem;
+				overflow: hidden;
+			}
+			.form h1{
+				height: 0.36rem;
+				border-top-left-radius: 0.1rem;
+				border-top-right-radius: 0.1rem;
+				font-size: 0.16rem;
+				color: red;
+				font-weight: bold;
+				line-height: 0.36rem;
+				text-indent: 1.7rem;
+				background: #d9d9d9 url('./images/h-three.png') no-repeat 20px center/ 50% auto;
+			}
+			.form-content{
+				font-size: 0.18rem;
+				margin: 0.15rem 0.12rem;
+			}
+			.form-content div{
+				margin: 0.15rem 0;
+			}
+			.form-content div span{
+				width: 0.9rem;
+				display: inline-block;
+			}
+			.form-content div input{
+				border-radius: 5px;
+				border: 1px solid #c8c8c8;
+				width: 1.8rem;
+				height: 0.25rem;
+				line-height: 0.25rem;
+				font-size: 0.14rem;
+				text-indent: 0.05rem;
+			}
+			.form-content p .iden-tit{
+				font-weight: bolder;
+				font-size: 0.16rem;
+			}
+			.form-content p .iden-tip{
+				font-weight: bolder;
+				font-size: 0.12rem;
+				color: #f55b36;
+			}
+			.iden-container{
+				display: -webkit-box;
+				-webkit-box-orient: horizontal;
+			}
+			.iden-container div{
+				-webkit-box-flex: 1;
+				-webkit-box-align: center;
+				margin: 0;
+				text-align: center;
+			}
+			.iden-container div img{
+				width: 1.27rem;
+				display: block;
+				margin: 0 auto;
+				font-size: 0;
+			}
+			.iden-container div a{
+				display: inline-block;
+				background-color: #058be2;
+				border-radius: 5px;
+				width: 0.8rem;
+				height: 0.3rem;
+				line-height: 0.3rem;
+				color: #fff;
+				font-weight: bolder;
+				margin-top: 0.15rem;
+				font-size: 0.14rem;
+			}
+			.submit-btn{
+				margin: 0.2rem 0.11rem;
+				height: 0.36rem;
+				line-height: 0.36rem;
+				font-size: 0.18rem;
+				background-color: red;
+				display: block;
+				text-align: center;
+				border-radius: 10px;
+				border: 1px solid #013c63;
+				color: #fff;
+			}
+			select{
+				height: 0.25rem;
+				line-height: 0.25rem;
+				vertical-align: 3px;
+				width: 1.8rem;
+				border-radius: 5px;
+				border: 1px solid #c8c8c8;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<h1>宽带报装说明</h1>
+		</header>
+		<section class="white-container first">
+			<div class="tab-one">
+				<h1>宽带普惠资费</h1>
+				<table>
+					<thead>
+						<tr>
+							<th>带宽</th>
+							<th>资费/1年</th>
+							<th>资费/2年</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>12M</td>
+							<td>480元</td>
+							<td>960元</td>
+						</tr>
+						<tr>
+							<td>20M</td>
+							<td>600元</td>
+							<td>1200元</td>
+						</tr>
+						<tr>
+							<td>50M</td>
+							<td>720元</td>
+							<td>1440元</td>
+						</tr>
+						<tr>
+							<td>100M</td>
+							<td>840元</td>
+							<td>1680元</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-two">
+				<h1>宽带普惠资费</h1>
+				<p>58元4G套餐用户光宽带<strong>低至10元每月</strong></p>
+				<p>158元4G套餐用户<strong>送20M光宽带一年</strong></p>
+				<p>188元或以上4G套餐用户<strong>送50M光宽带一年</strong></p>
+				<p class="tip">办理手机58元或以上4G套餐，并承诺使用一年套餐(承诺期内套餐允许变更为更高价格4G套餐），可享受赠送家庭宽带优惠一年的优惠。</p>
+				<table>
+					<thead>
+						<tr>
+							<th width='110px' >4G套餐档次</th>
+							<th colspan="4">
+								<table>
+									<tr>
+										<th colspan="4">宽带优惠月套餐</th>
+									</tr>
+									<tr class="white">
+										<td>12M</td>
+										<td>20M</td>
+										<td>50M</td>
+										<td>100M</td>
+									</tr>
+								</table>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>58元-158元(不含)</td>
+							<td class="blue">10元</td>
+							<td>20元</td>
+							<td>30元</td>
+							<td>40元</td>
+						</tr>
+						<tr>
+							<td>158元-188元(不含)</td>
+							<td class="blue">免费享</td>
+							<td class="blue">免费享</td>
+							<td>20元</td>
+							<td>30元</td>
+						</tr>
+						<tr>
+							<td>188元及以上</td>
+							<td class="blue">免费享</td>
+							<td class="blue">免费享</td>
+							<td class="blue">免费享</td>
+							<td>20元</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="white-container text-tip">
+			<p>
+				<strong>新/老客户</strong>只要：<br />
+				<strong>一次性办理两年优惠, </strong><br />
+				就可获得<strong>200大元</strong>话费!
+			</p>
+			<p>
+				老客户的小伙伴只要：<br />
+				<strong>提前续费一个月</strong>	<br />
+				也可获得<strong>100大元</strong>话费！
+			</p>
+			<p>
+				还有,差点忘记跟小伙伴说了：<br />
+				新装宽带的小伙伴是要<strong>缴纳200元</strong>初装费
+			</p>
+			<p>
+				咨询热线：89992222或1008616
+			</p>
+		</section>
+
+		<section class="form">
+			<h1>（已中奖50元）</h1>
+			<form class="form-content">
+				<div><label ><span>联系人</span><input type="text" placeholder="请输入您的真实姓名" ></label></div>
+				<div><label ><span>联系电话</span><input type="text" placeholder="请输入您的电话" ></label></div>
+				<div><label ><span>预约安装</span><input type="text" placeholder="2015-08-11" ></label></div>
+				<div><label ><span>是否续费</span><input type="text" placeholder="请选择是否续费" ></label></div>
+				<div><label ><span>手机套餐</span><input type="text" placeholder="请选择手机套餐" ></label></div>
+				<div><label ><span>安装地址</span><input type="text" placeholder="如：广东省禅城区X路X号" ></label></div>
+				<div><label ><span>选择宽带</span><input type="text" placeholder="请选择宽带" ></label></div>
+				<p>
+					<span class="iden-tit">上传身份证</span>
+					<span class="iden-tip">上传正面 > 上传背面 > 提交身份证</span>
+				</p>
+				<div class="iden-container">
+					<div>
+						<img src="./images/iden-1.png" alt="正面">
+						<a href="javascript:;">上传正面</a>
+					</div>
+					<div>
+						<img src="./images/iden-2.png" alt="背面">
+						<a href="javascript:;">上传背面</a>
+					</div>
+				</div>
+			</form>
+		</section>
+
+		<footer>
+			<a href="javascript:;" class="submit-btn">提交宽带报装</a>
+		</footer>
+	</body>
+
+</html>

@@ -1,0 +1,97 @@
+@font-face{
+	font-family: 'hjm Nike';
+	src: url(../../res/theNikeFont.woff) format('trueType');
+}
+/*************************************************************
+     样式重置
+*************************************************************/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: 'hjm Nike',Helvetica,Arial,"Heiti SC","ST Heiti",华文黑体,"Microsoft YaHei",雅黑体,SimHei,黑体,sans-serif;
+}
+/* 在旧版本浏览器中显示HTML5元素 */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+        box-sizing: border-box;
+}
+body {
+	font-size: 100%;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*选择*/
+::selection{background-color: #690;color: #fff;text-shadow: none;}
+::-moz-selection{background-color: #690;color: #fff;text-shadow: none;}
+/*去掉a的下划线*/
+a{
+	text-decoration: none;
+}
+a {blr: expression(this.onFocus=this.blur())}/*if IE*/
+ /*************************************************************
+     常用样式集合
+*************************************************************/
+
+/* 清除浮动影响 */
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix {
+	*zoom: 1; /* HACK_IE_LTE_7: IE7及更老版本的IE不支持:after伪元素 */
+}
+
+/* 浮动元素 */
+.fLeft {
+	float: left;
+}
+.fRight {
+	float: right;
+}
+
+/* 无障碍访问（隐藏文字）*/
+.accessibility {
+	position: absolute;
+	text-indent: -9999px;
+}
+
+.mb20  {margin-bottom: 20px;}
+.mr0 {margin-right: 0 !important;}
