@@ -57,7 +57,7 @@ public class SignUtil {
 	 * @param byteArray
 	 * @return
 	 */
-	private static String byteToStr(byte[] byteArray) {
+	public static String byteToStr(byte[] byteArray) {
 		String strDigest = "";
 		for (int i = 0; i < byteArray.length; i++) {
 			strDigest += byteToHexStr(byteArray[i]);
@@ -71,7 +71,7 @@ public class SignUtil {
 	 * @param mByte
 	 * @return
 	 */
-	private static String byteToHexStr(byte mByte) {
+	public static String byteToHexStr(byte mByte) {
 		
 		char[] Digit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 		char[] tempArr = new char[2];

@@ -15,7 +15,7 @@
 	<context:component-scan base-package="org.jeecgframework.core.common.service.*" />
 
 	<!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
-	<context:component-scan base-package="org.jeecgframework.web.*,weixin.*,com.jeecg.*">
+	<context:component-scan base-package="org.jeecgframework.web.*,weixin.*,com.jeecg.*,com.buss.*">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -102,6 +102,7 @@
 				<value>org.jeecgframework.web.cgform.entity.*</value>
 				<value>org.jeecgframework.web.cgreport.entity.*</value>
 				<value>org.jeecgframework.web.rest.*</value>
+				<value>com.buss.lan.entity</value>
 				<value>weixin.*</value>
 			</list>
 		</property>

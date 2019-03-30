@@ -3,6 +3,7 @@ package org.jeecgframework.web.ftth.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.jeecgframework.web.system.pojo.base.DictEntity;
 import org.jeecgframework.web.system.service.SystemService;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
@@ -33,6 +35,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.buss.lan.entity.FtthCustomerInfoEntity;
+import com.buss.lan.entity.FtthInfoEntity;
+import com.buss.lan.service.FtthCustomerInfoServiceI;
+import com.buss.lan.service.FtthInfoServiceI;
 
 /**
  * 
@@ -48,10 +55,50 @@ public class WeixinFtthInfoController extends BaseController{
 
 	private static Logger log = Logger.getLogger(WeixinFtthInfoController.class);
 	
+	@Autowired
+	private FtthInfoServiceI ftthInfoService;
+	
+	@Autowired
+    private FtthCustomerInfoServiceI ftthCustomerInfoServiceI;
+	
+	@Autowired
+	private SystemService systemService;
+	private String message;
 	
 	@RequestMapping(params = "ftthInfoListWechat")
 	public ModelAndView ftthInfoListWechat(HttpServletRequest request) {
 		
 		return new ModelAndView("ftth/ftthInfoListWechat");
+	}
+	
+	@RequestMapping(params = "myWallet")
+	public ModelAndView myWallet(HttpServletRequest request) {
+		
+		return new ModelAndView("ftth/myWallet");
+	}
+	
+	@RequestMapping(params = "doAdd")
+	public ModelAndView doAdd(FtthInfoEntity ftthInfo, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		message = "ftth_info添加成功";
+		try{
+			ftthInfo.setCreateTime(new Date());
+			ftthInfoService.save(ftthInfo);
+			
+			FtthCustomerInfoEntity ftthCustomerInfoEntity = ftthCustomerInfoServiceI.findByOpenId(ftthInfo.getOpenId());
+	        //更新客户电话
+	        if(ftthCustomerInfoEntity!=null){
+	        	ftthCustomerInfoEntity.setPhone(ftthInfo.getPhone());
+	            ftthCustomerInfoServiceI.save(ftthCustomerInfoEntity);
+	        }
+	        
+			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "ftth_info添加失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return new ModelAndView("ftth/saveSuccess");
 	}
 }

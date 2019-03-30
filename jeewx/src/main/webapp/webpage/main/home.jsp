@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <link type="text/css" rel="stylesheet" href="./plug-in/weixin/css/style.css">
      <div class="funcList" id="func">
-            <ul class="list">
+         <h1>宽带报装管理</h1><br>
+         <p></p>
+         <h1>宽带用户管理</h1><br>
+         <p></p>
+            <%-- <ul class="list">
             	<li>
                     <img src="./plug-in/weixin/img/weixin.jpg" width="95" height="98">
                     <h3>微信公众号</h3>
@@ -131,5 +135,5 @@
                    <p>关键词回复轻松设<br>置</p>
                    </li>
                    </a>
-            </ul>
+            </ul> --%>
 </div>

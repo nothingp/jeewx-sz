@@ -224,6 +224,49 @@ public class WeixinAccountServiceImpl extends CommonServiceImpl implements
 			return weixinAccountEntity;
 		}
 	}
+	
+	 public String getJsApiTicket() {
+	        WeixinAccountEntity weixinAccountEntity = this.findLoginWeixinAccount();
+	        String ticket = weixinAccountEntity.getJsapiticket();
+	        String token = this.getAccessToken();
+	        if (ticket != null && !"".equals(ticket)) {
+	            Date end = new Date();
+	            Date start = new Date(weixinAccountEntity.getJsapitickettime().getTime());
+	            if ((end.getTime() - start.getTime()) / 1000L / 3600L < 2L) {
+	                return weixinAccountEntity.getJsapiticket();
+	            }
+
+	            String requestUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi".replace("ACCESS_TOKEN", token);
+	            JSONObject jsonObject = WeixinUtil.httpRequest(requestUrl, "GET", (String)null);
+	            if (null != jsonObject) {
+	                try {
+	                    ticket = jsonObject.getString("ticket");
+	                    weixinAccountEntity.setJsapiticket(ticket);
+	                    weixinAccountEntity.setJsapitickettime(new Date());
+	                    this.saveOrUpdate(weixinAccountEntity);
+	                } catch (Exception var11) {
+	                    ticket = null;
+	                    (new StringBuilder()).append("获取ticket失败 errcode:{} errmsg:{}").append(jsonObject.getInt("errcode")).append(jsonObject.getString("errmsg")).toString();
+	                }
+	            }
+	        } else {
+	            String requestUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi".replace("ACCESS_TOKEN", token);
+	            JSONObject jsonObject = WeixinUtil.httpRequest(requestUrl, "GET", (String)null);
+	            if (null != jsonObject) {
+	                try {
+	                    ticket = jsonObject.getString("ticket");
+	                    weixinAccountEntity.setJsapiticket(ticket);
+	                    weixinAccountEntity.setJsapitickettime(new Date());
+	                    this.saveOrUpdate(weixinAccountEntity);
+	                } catch (Exception var10) {
+	                    ticket = null;
+	                    (new StringBuilder()).append("ticket errcode:{} errmsg:{}").append(jsonObject.getInt("errcode")).append(jsonObject.getString("errmsg")).toString();
+	                }
+	            }
+	        }
+
+	        return ticket;
+	    }
 
 	@Override
 	public List<WeixinAccountEntity> findByUsername(String username) {

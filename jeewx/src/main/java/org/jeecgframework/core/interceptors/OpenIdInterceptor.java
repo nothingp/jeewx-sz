@@ -1,6 +1,12 @@
 package org.jeecgframework.core.interceptors;
 
 import com.alibaba.fastjson.JSON;
+import com.buss.lan.entity.FtthCustomerInfoEntity;
+import com.buss.lan.service.FtthCustomerInfoServiceI;
+
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -19,6 +25,9 @@ public class OpenIdInterceptor implements HandlerInterceptor {
     private static final Logger logger = Logger.getLogger(OpenIdInterceptor.class);
     @Autowired
     private WeixinAccountServiceI weixinAccountService;
+    
+    @Autowired
+    private FtthCustomerInfoServiceI ftthCustomerInfoServiceI;
 
     public OpenIdInterceptor() {
     }
@@ -64,6 +73,21 @@ public class OpenIdInterceptor implements HandlerInterceptor {
         if (StringUtil.isNotEmpty(resellOpenId)) {
             request.getSession().setAttribute("resellOpenId", resellOpenId);
         }
+        
+        FtthCustomerInfoEntity ftthCustomerInfoEntity = ftthCustomerInfoServiceI.findByOpenId(openId);
+        //为空则记录
+        if(ftthCustomerInfoEntity==null){
+        	ftthCustomerInfoEntity = new FtthCustomerInfoEntity();
+            ftthCustomerInfoEntity.setName(subscribeUserInfo.getNickname());
+            ftthCustomerInfoEntity.setOpenId(subscribeUserInfo.getOpenid());
+            ftthCustomerInfoEntity.setUpperOpenId(resellOpenId);
+            ftthCustomerInfoEntity.setCreateTime(new Date());
+            ftthCustomerInfoEntity.setArea("0");
+            
+            ftthCustomerInfoServiceI.save(ftthCustomerInfoEntity);
+        }
+        
+        
 
         return true;
     }

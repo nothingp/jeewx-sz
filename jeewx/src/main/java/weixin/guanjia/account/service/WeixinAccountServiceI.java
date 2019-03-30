@@ -39,6 +39,8 @@ public interface WeixinAccountServiceI extends CommonService{
  	public String getAccessToken();
 
  	public String getAccessToken(String accountId,boolean isOrgWxid);
+ 	
+ 	public String getJsApiTicket();
 
  	@Deprecated
  	public WeixinAccountEntity findLoginWeixinAccount();

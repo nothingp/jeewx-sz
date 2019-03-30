@@ -132,7 +132,7 @@ a:hover {
 <div region="north" border="false" title="" style="BACKGROUND: #A8D7E9; height: 100px; padding: 1px; overflow: hidden;">
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td align="left" style="vertical-align: text-bottom"><img src="plug-in/weixin/logo/logo_weixin2.png"> <!--
+		<td align="left" style="vertical-align: text-bottom"><!-- <img src="plug-in/weixin/logo/logo_weixin2.png"> --> <!--
 		        <img src="plug-in/login/images/toplogo.png" width="550" height="52" alt="">-->
 		</td>
 		<td align="right" nowrap>
@@ -202,9 +202,9 @@ a:hover {
 </div>
 </div>
 <!-- 底部 -->
-<div region="south" border="false" style="height: 25px; overflow: hidden;">
+<!-- <div region="south" border="false" style="height: 25px; overflow: hidden;">
 <div align="center" style="color: #CC99FF; padding-top: 2px">&copy; 版权所有 <span class="tip"><a href="http://www.jeewx.com" title="Jeewx 捷微管家系统" target="_blank">JEEWX_3.1.0捷微官网</a> (推荐谷歌浏览器，获得更快响应速度) &nbsp;&nbsp;技术支持: <a href="http://www.jeecg.org" title="Jeecg论坛" target="_blank">JEECG技术论坛</a> </span></div>
-</div>
+</div> -->
 <div id="mm" class="easyui-menu" style="width: 150px;">
 <div id="mm-tabupdate">刷新</div>
 <div id="mm-tabclose">关闭</div>

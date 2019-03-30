@@ -265,8 +265,8 @@
 			wx.ready(function(){
 				wx.onMenuShareTimeline({
 					title: '抢！抢！抢！宽带', // 分享标题
-					link: 'http://www.10086ftth.cn/Wechat/ftthInfoController.do?reward&resellOpenId=${openId}', // 分享链接
-					imgUrl: 'http://www.10086ftth.cn/Wechat/toAdd/images/header.png', // 分享图标
+					link: 'http://127.0.0.1:8080/jeewx/ftthInfoController.do?reward&resellOpenId=${openId}', // 分享链接
+					imgUrl: 'http://127.0.0.1:8080/jeewx/toAdd/images/header.png', // 分享图标
 					success: function () {
 						// 用户确认分享后执行的回调函数
 					},
@@ -277,9 +277,9 @@
 
 				wx.onMenuShareAppMessage({
 					title: '抢！抢！抢！宽带', // 分享标题
-					desc: '佛山移动光宽带有奖报装', // 分享描述
-					link: 'http://www.10086ftth.cn/Wechat/ftthInfoController.do?reward&resellOpenId=${openId}', // 分享链接
-					imgUrl: 'http://www.10086ftth.cn/Wechat/toAdd/images/header.png', // 分享图标
+					desc: '龙华移动光宽带有奖报装', // 分享描述
+					link: 'http://127.0.0.1:8080/jeewx/ftthInfoController.do?reward&resellOpenId=${openId}', // 分享链接
+					imgUrl: 'http://127.0.0.1:8080/jeewx/toAdd/images/header.png', // 分享图标
 					success: function () {
 						// 用户确认分享后执行的回调函数
 					},
@@ -290,68 +290,25 @@
 			});
 
 
-			function selectFrontImage(){
-				wx.chooseImage({
-					count: 1, // 默认9
-					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-					success: function (res) {
-						var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-						$('#idCardFrontImg').attr('src',localIds[0]);
-//alert(localIds[0]);
-						wx.uploadImage({
-							localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
-							isShowProgressTips: 1, // 默认为1，显示进度提示
-							success: function (res) {
-								var serverId = res.serverId; // 返回图片的服务器端ID
-								//alert(serverId);
-								$('#idCardFront').val(serverId);
-							}
-						});
-					}
-				});
-			}
-
-			function selectBackImage(){
-				wx.chooseImage({
-					count: 1, // 默认9
-					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-					success: function (res) {
-						var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-						$('#idCardBackImg').attr('src',localIds[0]);
-						wx.uploadImage({
-							localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
-							isShowProgressTips: 1, // 默认为1，显示进度提示
-							success: function (res) {
-								var serverId = res.serverId; // 返回图片的服务器端ID
-								//alert(serverId);
-								$('#idCardBack').val(serverId);
-							}
-						});
-					}
-				});
-			}
-
 			function submitForm(){
 
-				if($("#name").val()==''){
+	/* 			if($("#name").val()==''){
 					alert('请输入联系人！');
 					return false;
-				}
+				} */
 
 				if($("#phone").val()==''){
 					alert('请输入联系电话！');
 					return false;
 				}
 
-				if($("#addressName").val()==''){
-					alert('请输入小区信息！');
+				if($("#address").val()==''){
+					alert('请输入地址信息！');
 					return false;
 				}
 
 
-				if($("#addressTail").val()==''){
+				/* if($("#addressTail").val()==''){
 					alert('请输入详细楼层信息！');
 					return false;
 				}
@@ -364,9 +321,9 @@
 				if(false&&$("#idCardBack").val()==''){
 					alert('请选择身份证照片！');
 					return false;
-				}
+				} */
 
-				$("#address").val($("#addressPre").val()+'---'+$("#addressTail").val());
+				//$("#address").val($("#addressPre").val()+'---'+$("#addressTail").val());
 				//alert($("#addressPre").val()+'---'+$("#addressTail").val());
 
 
@@ -564,36 +521,34 @@
 			</div>
 		</section>
 
-		<section class="white-container text-tip">
+		<%-- <section class="white-container text-tip">
 			<p style="display:none">
 				<strong>其他运营商宽带</strong>只要：<br />
 				<strong>转用中国移动光纤宽带</strong><br />
 				就可获得<strong>200大元</strong>话费!
 			</p>
-			<%--<p>--%>
-				<%--老客户的小伙伴只要：<br />--%>
-				<%--<strong>提前续费一个月</strong>	<br />--%>
-				<%--也可获得<strong>100大元</strong>话费！--%>
-			<%--</p>--%>
+			<p>
+				老客户的小伙伴只要：<br />
+				<strong>提前续费一个月</strong>	<br />
+				也可获得<strong>100大元</strong>话费！
+			</p>
 			<p >
 				新装宽带的小伙伴是要<strong>缴纳200元</strong>初装费(在宽带安装好之后由装维师傅收取)
 			</p>
 			<p >
 				咨询热线：89992222
 			</p>
-		</section>
+		</section> --%>
 
 		<section class="form" >
-
+<%-- 
 			<h1> <c:if test="${not empty sessionScope.randomCoupon}">（已中奖${sessionScope.randomCoupon}元）</c:if></h1>
-
-			<form method="post" class="form-content" id="ftthForm" action="ftthInfoController.do?saveFtthInfoWechat" onsubmit="return validate()">
-				<input type="hidden" id="coupon" name="coupon" value="0" />
+ --%>
+			<form method="post" class="form-content" id="ftthForm" action="weixinFtthInfoController.do?doAdd" onsubmit="return validate()">
 				<input type="hidden" id="openId" name="openId" value="${sessionScope.openId}"/>
-				<input type="hidden" id="resellOpenId" name="resellOpenId" value="${sessionScope.resellOpenId}"/>
+				<input type="hidden" id="sellerOpenId" name="resellOpenId" value="${sessionScope.resellOpenId}"/>
 				<input type="hidden" id="state" name="state" value="1" />
-				<input type="hidden" id="packagePrice" name="packagePrice" />
-				<input type="hidden" id="address" name="address" />
+				<input type="hidden" id="isDeal" name="isDeal" value="N" />
 				<!-- <div><label ><span>联系人</span><input id="name" name="name" type="text" placeholder="请输入您的真实姓名" ></label></div> -->
 				<div><label ><span>联系电话</span><input id="phone" name="phone" type="text" placeholder="请输入您的电话" ></label></div>
 				<%-- <div><label ><span>手机套餐</span><select id="phonePackage" name="phonePackage">
