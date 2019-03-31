@@ -1,4 +1,4 @@
-package com.buss.detail.entity;
+package com.buss.lan.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -20,30 +20,24 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**   
  * @Title: Entity
- * @Description: 佣金明细
+ * @Description: 提现日志
  * @author onlineGenerator
- * @date 2019-03-30 21:13:48
+ * @date 2019-03-30 21:13:49
  * @version V1.0   
  *
  */
 @Entity
-@Table(name = "ftth_commission_detail", schema = "")
+@Table(name = "ftth_commission_log", schema = "")
 @SuppressWarnings("serial")
-public class FtthCommissionDetailEntity implements java.io.Serializable {
+public class FtthCommissionLogEntity implements java.io.Serializable {
 	/**主键*/
 	private java.lang.String id;
 	/**客户分佣信息ID*/
 	@Excel(exportName="客户分佣信息ID")
 	private java.lang.String ftthCommissionId;
-	/**报装订单Id*/
-	@Excel(exportName="报装订单Id")
-	private java.lang.String ftthInfoId;
-	/**分销级次*/
-	@Excel(exportName="分销级次")
-	private java.lang.Integer level;
-	/**金额*/
-	@Excel(exportName="金额")
-	private java.lang.Double amount;
+	/**提现金额*/
+	@Excel(exportName="提现金额")
+	private java.lang.Double dealAmount;
 	/**创建时间*/
 	@Excel(exportName="创建时间")
 	private java.util.Date createTime;
@@ -71,7 +65,7 @@ public class FtthCommissionDetailEntity implements java.io.Serializable {
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  客户分佣信息ID
 	 */
-	@Column(name ="FTTH_COMMISSION_ID",nullable=true,length=36)
+	@Column(name ="FTTH_COMMISSION_ID",nullable=true,length=200)
 	public java.lang.String getFtthCommissionId(){
 		return this.ftthCommissionId;
 	}
@@ -84,52 +78,20 @@ public class FtthCommissionDetailEntity implements java.io.Serializable {
 		this.ftthCommissionId = ftthCommissionId;
 	}
 	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  报装订单Id
-	 */
-	@Column(name ="FTTH_INFO_ID",nullable=true,length=36)
-	public java.lang.String getFtthInfoId(){
-		return this.ftthInfoId;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  报装订单Id
-	 */
-	public void setFtthInfoId(java.lang.String ftthInfoId){
-		this.ftthInfoId = ftthInfoId;
-	}
-	/**
-	 *方法: 取得java.lang.Integer
-	 *@return: java.lang.Integer  分销级次
-	 */
-	@Column(name ="LEVEL",nullable=true,length=10)
-	public java.lang.Integer getLevel(){
-		return this.level;
-	}
-
-	/**
-	 *方法: 设置java.lang.Integer
-	 *@param: java.lang.Integer  分销级次
-	 */
-	public void setLevel(java.lang.Integer level){
-		this.level = level;
-	}
-	/**
 	 *方法: 取得java.lang.Double
-	 *@return: java.lang.Double  金额
+	 *@return: java.lang.Double  提现金额
 	 */
-	@Column(name ="AMOUNT",nullable=true,length=22)
-	public java.lang.Double getAmount(){
-		return this.amount;
+	@Column(name ="DEAL_AMOUNT",nullable=true,length=22)
+	public java.lang.Double getDealAmount(){
+		return this.dealAmount;
 	}
 
 	/**
 	 *方法: 设置java.lang.Double
-	 *@param: java.lang.Double  金额
+	 *@param: java.lang.Double  提现金额
 	 */
-	public void setAmount(java.lang.Double amount){
-		this.amount = amount;
+	public void setDealAmount(java.lang.Double dealAmount){
+		this.dealAmount = dealAmount;
 	}
 	/**
 	 *方法: 取得java.util.Date

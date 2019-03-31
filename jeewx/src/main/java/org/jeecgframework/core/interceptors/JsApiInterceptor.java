@@ -46,6 +46,7 @@ public class JsApiInterceptor implements HandlerInterceptor {
         request.setAttribute("nonceStr", nonce_str);
         request.setAttribute("timeStamp", timestamp);
         request.setAttribute("signature", signature);
+        request.setAttribute("preUrl", preUrl);
         return true;
     }
 }

@@ -13,7 +13,8 @@
 		<title>移动宽带报装</title>
 
 		<script type="text/javascript" src="${webRoot}/toAdd/src/js/resize.js"></script>
-		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="${webRoot}/toAdd/src/css/reset.css">
 
 		<script>
@@ -244,30 +245,41 @@
 			}
 		</style>
 		<script type="text/javascript">
-			/* wx.config({
-				debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-				appId: ${appId}, // 必填，公众号的唯一标识
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: '${appId}', // 必填，公众号的唯一标识
 				timestamp: ${timeStamp}, // 必填，生成签名的时间戳
 				nonceStr: '${nonceStr}', // 必填，生成签名的随机串
 				signature: '${signature}',// 必填，签名，见附录1
-				jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				jsApiList: ['chooseImage','uploadImage','onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 			});
 
-			function selectFrontImage(){
-				alert('123');
-				wx.chooseImage({
-					count: 1, // 默认9
-					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-					success: function (res) {
-						var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+			wx.ready(function(){
+				wx.onMenuShareTimeline({
+					title: '抢！抢！抢！宽带', // 分享标题
+					link: '${preUrl}/weixinFtthInfoController.do?ftthInfoListWechat&resellOpenId=${openId}', // 分享链接
+					imgUrl: '${preUrl}/toAdd/images/header.png', // 分享图标
+					success: function () {
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function () {
+						// 用户取消分享后执行的回调函数
 					}
 				});
-			} */
 
-			function validate(){
-
-			}
+				wx.onMenuShareAppMessage({
+					title: '抢！抢！抢！宽带', // 分享标题
+					desc: '龙华移动光宽带有奖报装', // 分享描述
+					link: '${preUrl}/weixinFtthInfoController.do?ftthInfoListWechat&resellOpenId=${openId}', // 分享链接
+					imgUrl: '${preUrl}/toAdd/images/header.png', // 分享图标
+					success: function () {
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function () {
+						// 用户取消分享后执行的回调函数
+					}
+				});
+			});
 		</script>
 	</head>
 

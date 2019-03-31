@@ -1,8 +1,8 @@
 
 package com.buss.lan.page;
+import com.buss.lan.entity.FtthCommissionDetailEntity;
 import com.buss.lan.entity.FtthCommissionInfoEntity;
-import com.buss.detail.entity.FtthCommissionDetailEntity;
-import com.buss.log.entity.FtthCommissionLogEntity;
+import com.buss.lan.entity.FtthCommissionLogEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;

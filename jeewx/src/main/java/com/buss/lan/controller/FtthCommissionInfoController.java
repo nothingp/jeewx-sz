@@ -1,9 +1,12 @@
 package com.buss.lan.controller;
+import com.buss.lan.entity.FtthCommissionDetailEntity;
 import com.buss.lan.entity.FtthCommissionInfoEntity;
+import com.buss.lan.entity.FtthCommissionLogEntity;
+import com.buss.lan.entity.FtthInfoEntity;
 import com.buss.lan.service.FtthCommissionInfoServiceI;
+import com.buss.lan.service.FtthInfoServiceI;
 import com.buss.lan.page.FtthCommissionInfoPage;
-import com.buss.detail.entity.FtthCommissionDetailEntity;
-import com.buss.log.entity.FtthCommissionLogEntity;
+
 import java.util.List;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +50,10 @@ public class FtthCommissionInfoController extends BaseController {
 
 	@Autowired
 	private FtthCommissionInfoServiceI ftthCommissionInfoService;
+	
+	@Autowired
+	private FtthInfoServiceI ftthInfoService;
+	
 	@Autowired
 	private SystemService systemService;
 
@@ -256,4 +263,22 @@ public class FtthCommissionInfoController extends BaseController {
 		return new ModelAndView("com/buss/log/ftthCommissionLogList");
 	}
 	
+	
+	@RequestMapping(params = "doCommissionImport")
+	@ResponseBody
+	public AjaxJson doCommissionImport(HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		String message = "佣金导入成功";
+		try{
+			List<FtthInfoEntity> ftthInfoEntityList =  ftthInfoService.getCommissionFtthInfo();
+			ftthCommissionInfoService.doCommissionImport(ftthInfoEntityList);
+			systemService.addLog(message, Globals.Log_Type_UPLOAD, Globals.Log_Leavel_INFO);
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "导入ftth_commission_info失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
 }

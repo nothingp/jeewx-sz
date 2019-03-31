@@ -1,7 +1,8 @@
 package com.buss.lan.service;
+import com.buss.lan.entity.FtthCommissionDetailEntity;
 import com.buss.lan.entity.FtthCommissionInfoEntity;
-import com.buss.detail.entity.FtthCommissionDetailEntity;
-import com.buss.log.entity.FtthCommissionLogEntity;
+import com.buss.lan.entity.FtthCommissionLogEntity;
+import com.buss.lan.entity.FtthInfoEntity;
 
 import java.util.List;
 import org.jeecgframework.core.common.service.CommonService;
@@ -42,4 +43,13 @@ public interface FtthCommissionInfoServiceI extends CommonService{
 	 * @return
 	 */
  	public boolean doDelSql(FtthCommissionInfoEntity t);
+ 	
+ 	
+ 	public void doCommissionImport(List<FtthInfoEntity> entities);
+ 	
+ 	public FtthCommissionInfoEntity findByOpenId(String openId);
+ 	
+ 	public Long findTotalByOpenId(String openId);
+ 	
+ 	public Long findMonthTotalByOpenId(String openId);
 }

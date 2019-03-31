@@ -3,7 +3,7 @@
 <!DOCTYPE html >
 <html>
 <head>
-<title>JeeWx 开源微信管家平台</title>
+<title>宽带报装</title>
 <t:base type="jquery,easyui,tools,DatePicker,autocomplete"></t:base>
 <!-- layer 提示信息，插件提交不了问题解决   scott  20180314 -->
 <script src="plug-in-ui/hplus/js/plugins/layer/layer.min.js"></script>

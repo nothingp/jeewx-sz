@@ -11,7 +11,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="format-detection" content="address=no">
-		<title>我的钱包</title>
+		<title>我的团队</title>
 
 		<script type="text/javascript" src="${webRoot}/wallet/src/js/resize.js"></script>
 		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
@@ -182,29 +182,20 @@
 			<table>
 				<tr>
 					<td>
-						<p><span>${amount}</span> 元</p>
-						<p>总收入</p>
-					</td>
-					<td class="lastCol">
-						<p><span>${dealAmount}</span> 元</p>
-						<p>已提现</p>
+						<p><span>${upperName}</span></p>
+						<p>上级名称</p>
 					</td>
 				</tr>
 				<tr>
-					<td class="lastrow">
-						<p><span>${resellCount}</span></a></p>
-						<p>总单数</p>
-					</td>
-					<td class="lastCol lastrow">
-						<p><span>${resellCountMonth}</span></p>
-						<p>本月单数</p>
+					<td class="lastCol">
+						<p><span>${teamCount}</span></p>
+						<p>下级人数</p>
 					</td>
 				</tr>
 			</table>
 		</header>
 		<footer>
 			<a href="${webRoot}/toAdd/result.html"><div class="icon-1">我的资料</div></a>
-			<a href="${webRoot}/weixinFtthInfoController.do?myTeam"><div class="icon-1">我的团队</div></a>
 			<a href="${webRoot}/toAdd/result.html"><div class="icon-3">优惠信息</div></a>
 			<%-- <a href="${webRoot}/ftthInfoController.do?myQrCode"><div class="icon-4">我的二维码</div></a> --%>
 			<%--<a href=""><div class="icon-5">我的宽带</div></a>--%>

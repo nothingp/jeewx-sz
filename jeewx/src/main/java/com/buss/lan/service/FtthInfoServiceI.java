@@ -3,6 +3,7 @@ import com.buss.lan.entity.FtthInfoEntity;
 import org.jeecgframework.core.common.service.CommonService;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface FtthInfoServiceI extends CommonService{
 	
@@ -30,4 +31,7 @@ public interface FtthInfoServiceI extends CommonService{
 	 * @return
 	 */
  	public boolean doDelSql(FtthInfoEntity t);
+ 	
+ 	
+ 	public List<FtthInfoEntity> getCommissionFtthInfo();
 }

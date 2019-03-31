@@ -1,7 +1,9 @@
 package org.jeecgframework.core.interceptors;
 
 import com.alibaba.fastjson.JSON;
+import com.buss.lan.entity.FtthCommissionInfoEntity;
 import com.buss.lan.entity.FtthCustomerInfoEntity;
+import com.buss.lan.service.FtthCommissionInfoServiceI;
 import com.buss.lan.service.FtthCustomerInfoServiceI;
 
 import java.util.Date;
@@ -28,6 +30,9 @@ public class OpenIdInterceptor implements HandlerInterceptor {
     
     @Autowired
     private FtthCustomerInfoServiceI ftthCustomerInfoServiceI;
+    
+    @Autowired
+    private FtthCommissionInfoServiceI ftthCommissionInfoService;
 
     public OpenIdInterceptor() {
     }
@@ -85,6 +90,14 @@ public class OpenIdInterceptor implements HandlerInterceptor {
             ftthCustomerInfoEntity.setArea("0");
             
             ftthCustomerInfoServiceI.save(ftthCustomerInfoEntity);
+            
+            FtthCommissionInfoEntity ftthCommissionInfoEntity = new FtthCommissionInfoEntity();
+            ftthCommissionInfoEntity.setOpenId(subscribeUserInfo.getOpenid());
+            ftthCommissionInfoEntity.setAmount(new Double(0));
+            ftthCommissionInfoEntity.setDealAmount(new Double(0));
+            ftthCommissionInfoEntity.setCreateTime(new Date());
+            
+            ftthCommissionInfoService.save(ftthCommissionInfoEntity);
         }
         
         

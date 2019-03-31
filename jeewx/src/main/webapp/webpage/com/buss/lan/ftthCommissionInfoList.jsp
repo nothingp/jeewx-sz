@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:1px;">
-  <t:datagrid name="ftthCommissionInfoList" checkbox="true" fitColumns="false" title="ftth_commission_info" actionUrl="ftthCommissionInfoController.do?datagrid" idField="id" fit="true" queryMode="group">
+  <t:datagrid name="ftthCommissionInfoList" checkbox="true" fitColumns="false" title="宽带佣金列表" actionUrl="ftthCommissionInfoController.do?datagrid" idField="id" fit="true" queryMode="group">
    <t:dgCol title="主键"  field="id"  hidden="false"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="客户open_id"  field="openId"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="佣金总额"  field="amount"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -15,7 +15,7 @@
    <t:dgToolBar title="编辑" icon="icon-edit" url="ftthCommissionInfoController.do?goUpdate" funname="update"></t:dgToolBar>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="ftthCommissionInfoController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
    <%-- <t:dgToolBar title="查看" icon="icon-search" url="ftthCommissionInfoController.do?goUpdate" funname="detail"></t:dgToolBar> --%>
-   <t:dgToolBar title="导入佣金" icon="icon-put" funname="ImportXls"></t:dgToolBar>
+   <t:dgToolBar title="导入佣金" icon="icon-put" funname="ImportCommission"></t:dgToolBar>
    <%-- <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar> --%>
   </t:datagrid>
@@ -42,5 +42,32 @@ function ExportXls() {
 //模板下载
 function ExportXlsByT() {
 	JeecgExcelExport("ftthCommissionInfoController.do?exportXlsByT","ftthCommissionInfoList");
+}
+
+function ImportCommission(){
+	var formData = new Object();
+ 	/* var data=$(":input").each(function() {
+		 formData[this.name] =$("#"+this.name ).val();
+	}); */
+ 	$.ajax({
+		async : false,
+		cache : false,
+		type : 'POST',
+		url : "ftthCommissionInfoController.do?doCommissionImport",// 请求的action路径
+		data : formData,
+		error : function() {// 请求失败处理函数
+ 			doError();
+		},
+		success : function(data) {
+			//var d = $.parseJSON(data);
+			var d = $.parseJSON(data);
+			if (d.success) {
+				var msg = d.msg;
+				tip(msg);
+				$('#ftthCommissionInfoList').datagrid('reload');
+			}		
+		}
+	});
+	
 }
  </script>

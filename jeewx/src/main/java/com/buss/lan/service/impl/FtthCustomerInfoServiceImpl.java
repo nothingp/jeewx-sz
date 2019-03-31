@@ -75,6 +75,10 @@ public class FtthCustomerInfoServiceImpl extends CommonServiceImpl implements Ft
  		return ftthCustomerInfoEntities.get(0);
  	}
  	
+ 	public long countByUpperOpenId(String openId){
+ 		return this.getCountForJdbcParam("select count(*) from ftth_customer_info a where a.upper_open_id=?",new String[]{openId});
+ 	}
+ 	
  	/**
 	 * 替换sql中的变量
 	 * @param sql

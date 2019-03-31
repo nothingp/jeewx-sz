@@ -4,6 +4,8 @@ import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
 import com.buss.lan.entity.FtthInfoEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.UUID;
 import java.io.Serializable;
 
@@ -72,5 +74,11 @@ public class FtthInfoServiceImpl extends CommonServiceImpl implements FtthInfoSe
  		sql  = sql.replace("#{is_deal}",String.valueOf(t.getIsDeal()));
  		sql  = sql.replace("#{UUID}",UUID.randomUUID().toString());
  		return sql;
+ 	}
+ 	
+ 	
+ 	public List<FtthInfoEntity>  getCommissionFtthInfo(){
+ 		return this.findHql("from FtthInfoEntity a where a.state='2' and a.isDeal='N' and not exists (select 1 from FtthCommissionDetailEntity b "
+ 				+ "where b.ftthInfoId=a.id)");
  	}
 }

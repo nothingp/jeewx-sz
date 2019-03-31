@@ -265,8 +265,8 @@
 			wx.ready(function(){
 				wx.onMenuShareTimeline({
 					title: '抢！抢！抢！宽带', // 分享标题
-					link: 'http://127.0.0.1:8080/jeewx/ftthInfoController.do?reward&resellOpenId=${openId}', // 分享链接
-					imgUrl: 'http://127.0.0.1:8080/jeewx/toAdd/images/header.png', // 分享图标
+					link: '${preUrl}/weixinFtthInfoController.do?ftthInfoListWechat&resellOpenId=${openId}', // 分享链接
+					imgUrl: '${preUrl}/toAdd/images/header.png', // 分享图标
 					success: function () {
 						// 用户确认分享后执行的回调函数
 					},
@@ -278,8 +278,8 @@
 				wx.onMenuShareAppMessage({
 					title: '抢！抢！抢！宽带', // 分享标题
 					desc: '龙华移动光宽带有奖报装', // 分享描述
-					link: 'http://127.0.0.1:8080/jeewx/ftthInfoController.do?reward&resellOpenId=${openId}', // 分享链接
-					imgUrl: 'http://127.0.0.1:8080/jeewx/toAdd/images/header.png', // 分享图标
+					link: '${preUrl}/weixinFtthInfoController.do?ftthInfoListWechat&resellOpenId=${openId}', // 分享链接
+					imgUrl: '${preUrl}/toAdd/images/header.png', // 分享图标
 					success: function () {
 						// 用户确认分享后执行的回调函数
 					},

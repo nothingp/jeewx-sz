@@ -1,10 +1,17 @@
 package com.buss.lan.service.impl;
 import com.buss.lan.service.FtthCommissionInfoServiceI;
-import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
-import com.buss.lan.entity.FtthCommissionInfoEntity;
-import com.buss.detail.entity.FtthCommissionDetailEntity;
-import com.buss.log.entity.FtthCommissionLogEntity;
+import com.buss.lan.service.FtthCustomerInfoServiceI;
+import com.buss.lan.service.FtthInfoServiceI;
 
+import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
+
+import com.buss.lan.entity.FtthCommissionDetailEntity;
+import com.buss.lan.entity.FtthCommissionInfoEntity;
+import com.buss.lan.entity.FtthCommissionLogEntity;
+import com.buss.lan.entity.FtthCustomerInfoEntity;
+import com.buss.lan.entity.FtthInfoEntity;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -14,6 +21,7 @@ import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.core.util.oConvertUtils;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 import java.io.Serializable;
 
@@ -21,6 +29,12 @@ import java.io.Serializable;
 @Service("ftthCommissionInfoService")
 @Transactional
 public class FtthCommissionInfoServiceImpl extends CommonServiceImpl implements FtthCommissionInfoServiceI {
+	
+	@Autowired
+	private FtthCustomerInfoServiceI ftthCustomerInfoService;
+	
+	@Autowired
+	private FtthInfoServiceI ftthInfoService;
 	
  	public <T> void delete(T entity) {
  		super.delete(entity);
@@ -181,5 +195,71 @@ public class FtthCommissionInfoServiceImpl extends CommonServiceImpl implements 
  		sql  = sql.replace("#{create_time}",String.valueOf(t.getCreateTime()));
  		sql  = sql.replace("#{UUID}",UUID.randomUUID().toString());
  		return sql;
+ 	}
+ 	
+ 	/**
+ 	 * 根据openId获取
+ 	 * @param openId
+ 	 * @return
+ 	 */
+ 	public FtthCommissionInfoEntity findByOpenId(String openId){
+ 		List<FtthCommissionInfoEntity> ftthCommissionInfoEntities = this.findByProperty(FtthCommissionInfoEntity.class, "openId", openId);
+        
+ 		if(ftthCommissionInfoEntities.isEmpty())
+ 			return null;
+        
+ 		return ftthCommissionInfoEntities.get(0);
+ 	}
+ 	
+ 	public void doCommissionImport(List<FtthInfoEntity> entities){
+ 		for(FtthInfoEntity entity:entities){
+ 			//如无分销信息则跳过
+ 			if(StringUtil.isEmpty(entity.getSellerOpenId())){
+ 				continue;
+ 			}
+ 			//一级分销
+ 			FtthCommissionInfoEntity ftthCommissionInfo = this.findByOpenId(entity.getSellerOpenId());
+ 			FtthCommissionDetailEntity ftthCommissionDetailEntity = new FtthCommissionDetailEntity();
+ 			ftthCommissionDetailEntity.setFtthCommissionId(ftthCommissionInfo.getId());
+ 			ftthCommissionDetailEntity.setFtthInfoId(entity.getId());
+ 			ftthCommissionDetailEntity.setLevel(1);
+ 			ftthCommissionDetailEntity.setAmount(new Double(30));
+ 			ftthCommissionDetailEntity.setCreateTime(new Date());
+ 			
+ 			ftthCommissionInfo.setAmount(ftthCommissionInfo.getAmount()+ftthCommissionDetailEntity.getAmount());
+ 			this.save(ftthCommissionInfo);
+ 			this.save(ftthCommissionDetailEntity);
+ 			
+ 			//二级分销
+ 			FtthCustomerInfoEntity ftthCustomerInfoEntity = ftthCustomerInfoService.findByOpenId(entity.getSellerOpenId());
+ 			if(StringUtil.isNotEmpty(ftthCustomerInfoEntity.getUpperOpenId())){
+ 				ftthCommissionInfo = this.findByOpenId(ftthCustomerInfoEntity.getUpperOpenId());
+ 	 			ftthCommissionDetailEntity = new FtthCommissionDetailEntity();
+ 	 			ftthCommissionDetailEntity.setFtthCommissionId(ftthCommissionInfo.getId());
+ 	 			ftthCommissionDetailEntity.setFtthInfoId(entity.getId());
+ 	 			ftthCommissionDetailEntity.setLevel(1);
+ 	 			ftthCommissionDetailEntity.setAmount(new Double(20));
+ 	 			ftthCommissionDetailEntity.setCreateTime(new Date());
+ 	 			
+ 	 			ftthCommissionInfo.setAmount(ftthCommissionInfo.getAmount()+ftthCommissionDetailEntity.getAmount());
+ 	 			this.save(ftthCommissionInfo);
+ 	 			
+ 	 			this.save(ftthCommissionDetailEntity);
+ 			}
+ 			
+ 			entity.setIsDeal("Y");
+ 			ftthInfoService.saveOrUpdate(entity);
+ 			
+ 		}
+ 	}
+ 	
+ 	public Long findTotalByOpenId(String openId){
+ 	 	return this.getCountForJdbcParam("select count(*) from ftth_commission_info a,ftth_commission_detail b "
+ 	 			+ "where a.open_id=? and a.id=b.ftth_commission_id",new String[]{openId});
+ 	}
+ 	
+ 	public Long findMonthTotalByOpenId(String openId){
+ 	 	return this.getCountForJdbcParam("select count(*) from ftth_commission_info a,ftth_commission_detail b "
+ 	 			+ "where a.open_id=? and a.id=b.ftth_commission_id and DATE_FORMAT(b.create_time,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m')",new String[]{openId});
  	}
 }

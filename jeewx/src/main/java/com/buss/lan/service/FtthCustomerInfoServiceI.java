@@ -32,4 +32,6 @@ public interface FtthCustomerInfoServiceI extends CommonService{
  	public boolean doDelSql(FtthCustomerInfoEntity t);
  	
  	public FtthCustomerInfoEntity findByOpenId(String openId);
+ 	
+ 	public long countByUpperOpenId(String openId);
 }

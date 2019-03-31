@@ -36,8 +36,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buss.lan.entity.FtthCommissionInfoEntity;
 import com.buss.lan.entity.FtthCustomerInfoEntity;
 import com.buss.lan.entity.FtthInfoEntity;
+import com.buss.lan.service.FtthCommissionInfoServiceI;
 import com.buss.lan.service.FtthCustomerInfoServiceI;
 import com.buss.lan.service.FtthInfoServiceI;
 
@@ -62,6 +64,9 @@ public class WeixinFtthInfoController extends BaseController{
     private FtthCustomerInfoServiceI ftthCustomerInfoServiceI;
 	
 	@Autowired
+	private FtthCommissionInfoServiceI ftthCommissionInfoServiceI;
+	
+	@Autowired
 	private SystemService systemService;
 	private String message;
 	
@@ -73,8 +78,34 @@ public class WeixinFtthInfoController extends BaseController{
 	
 	@RequestMapping(params = "myWallet")
 	public ModelAndView myWallet(HttpServletRequest request) {
+		String openId = (String)request.getSession().getAttribute("openId");
+		FtthCommissionInfoEntity ftthCommissionInfoEntity = ftthCommissionInfoServiceI.findByOpenId(openId);
 		
-		return new ModelAndView("ftth/myWallet");
+		ModelAndView mav=new ModelAndView("ftth/myWallet");
+		mav.addObject("amount", ftthCommissionInfoEntity.getAmount());
+		mav.addObject("dealAmount", ftthCommissionInfoEntity.getDealAmount());
+		mav.addObject("resellCount", ftthCommissionInfoServiceI.findTotalByOpenId(openId));
+		mav.addObject("resellCountMonth", ftthCommissionInfoServiceI.findMonthTotalByOpenId(openId));
+	
+		return mav;
+	}
+	
+	@RequestMapping(params = "myTeam")
+	public ModelAndView myTeam(HttpServletRequest request) {
+		ModelAndView mav=new ModelAndView("ftth/myTeam");
+		String openId = (String)request.getSession().getAttribute("openId");
+		FtthCustomerInfoEntity ftthCustomerInfoEntity =  ftthCustomerInfoServiceI.findByOpenId(openId);
+		
+		if(StringUtil.isNotEmpty(ftthCustomerInfoEntity.getUpperOpenId())){
+			ftthCustomerInfoEntity = ftthCustomerInfoServiceI.findByOpenId(openId);
+			mav.addObject("upperName", ftthCustomerInfoEntity.getName());
+		}else{
+			mav.addObject("upperName", "--");
+		}
+		
+		mav.addObject("teamCount", ftthCustomerInfoServiceI.countByUpperOpenId(openId));
+	
+		return mav;
 	}
 	
 	@RequestMapping(params = "doAdd")
